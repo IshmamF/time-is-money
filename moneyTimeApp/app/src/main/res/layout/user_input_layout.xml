@@ -59,4 +59,30 @@
         android:layout_height="wrap_content"
         android:text="Submit"
         android:layout_gravity="center"/>
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_weight="1"
+        android:id="@+id/bottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/financePage"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Finance"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end" />
+
+        <Button
+            android:id="@+id/timePage"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Time"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="start" />
+    </androidx.appcompat.widget.Toolbar>
+
 </LinearLayout>

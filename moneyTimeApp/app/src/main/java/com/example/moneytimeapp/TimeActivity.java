@@ -40,8 +40,8 @@ public class TimeActivity extends AppCompatActivity {
 
         binding.forward.setOnClickListener(this::updateDateAndDay);
         binding.backword.setOnClickListener(this::updateDateAndDay);
-        binding.homePage.setOnClickListener(this::switchPage);
         binding.financePage.setOnClickListener(this::switchPage);
+        binding.timePage.setOnClickListener(this::switchPage);
 
         binding.addEvent.setOnClickListener(this::inputPage);
         DateAndDay();
@@ -157,11 +157,11 @@ public class TimeActivity extends AppCompatActivity {
     public void switchPage(View view) {
         int id = view.getId();
         Intent intent;
-        if (id == R.id.homePage) {
-            intent = new Intent(this, MainActivity.class);
+        if (id == R.id.financePage) {
+            intent = new Intent(this, FinanceActivity.class);
         }
         else {
-            intent = new Intent(this, FinanceActivity.class);
+            intent = new Intent(this, TimeActivity.class);
         }
         startActivity(intent);
     }

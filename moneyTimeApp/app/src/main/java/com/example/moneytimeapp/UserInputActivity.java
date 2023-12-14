@@ -2,6 +2,7 @@ package com.example.moneytimeapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -28,6 +29,8 @@ public class UserInputActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.submitEvent.setOnClickListener(view -> submitEvent());
+        binding.financePage.setOnClickListener(this::switchPage);
+        binding.timePage.setOnClickListener(this::switchPage);
 
     }
 
@@ -69,4 +72,15 @@ public class UserInputActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void switchPage(View view) {
+        int id = view.getId();
+        Intent intent;
+        if (id == R.id.financePage) {
+            intent = new Intent(this, FinanceActivity.class);
+        }
+        else {
+            intent = new Intent(this, TimeActivity.class);
+        }
+        startActivity(intent);
+    }
 }

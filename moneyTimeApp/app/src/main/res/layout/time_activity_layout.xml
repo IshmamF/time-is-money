@@ -834,16 +834,6 @@
             >
         </Button>
         <Button
-            android:id="@+id/homePage"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Home"
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="center"
-            >
-        </Button>
-        <Button
-
             android:id="@+id/timePage"
             android:layout_width="100dp"
             android:layout_height="50dp"

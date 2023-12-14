@@ -13,13 +13,12 @@
         android:theme="@style/Theme.MoneyTimeApp"
         tools:targetApi="31" >
 
-        <activity android:name=".MainActivity" android:exported="true">
+        <activity android:name=".TimeActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".TimeActivity"/>
         <activity android:name=".FinanceActivity"/>
         <activity android:name=".UserInputActivity"/>
 

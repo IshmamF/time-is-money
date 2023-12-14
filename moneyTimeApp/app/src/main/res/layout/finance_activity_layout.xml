@@ -14,13 +14,35 @@
         android:textColor="@color/white"
         android:textSize="30dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/expenseInputLayout"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/financeTitle"
-        android:hint="Expense"
-        android:layout_marginTop="16dp">
+        android:id="@+id/costNum"
+        android:layout_marginTop="50dp"
+        android:text="0"
+        android:textAlignment="center"
+        >
+
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/costNum"
+        android:id="@+id/lastExpense"
+        android:layout_marginTop="30dp"
+        android:text="Last Expense"
+        android:textAlignment="center" >
+    </TextView>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/costInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lastExpense"
+        android:hint="Cost"
+        android:layout_marginTop="90dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/expenseEditText"
@@ -29,13 +51,28 @@
             android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/expenseLast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/costInputLayout"
+        android:hint="Expense"
+        android:layout_marginTop="50dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/lastExpenseInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
     <Button
         android:id="@+id/submitFinance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/expenseInputLayout"
+        android:layout_below="@id/costInputLayout"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="423dp"
+        android:layout_marginTop="208dp"
         android:text="Submit" />
 
     <androidx.appcompat.widget.Toolbar
@@ -52,13 +89,6 @@
             android:text="Finance"
             android:layout_marginEnd="10dp"
             android:layout_gravity="end" />
-
-        <Button
-            android:id="@+id/homePage"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:text="Home"
-            android:layout_gravity="center" />
 
         <Button
             android:id="@+id/timePage"
