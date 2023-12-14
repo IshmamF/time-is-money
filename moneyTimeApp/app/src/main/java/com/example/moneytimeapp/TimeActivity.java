@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moneytimeapp.databinding.HourActivityLayoutBinding;
 import com.example.moneytimeapp.databinding.TimeActivityLayoutBinding;
 import com.example.moneytimeapp.model.HourInfo;
 
@@ -22,6 +24,7 @@ import java.util.Locale;
 
 public class TimeActivity extends AppCompatActivity {
     TimeActivityLayoutBinding binding;
+    HourActivityLayoutBinding hourBinding;
 
     private Calendar c = Calendar.getInstance();
 
@@ -35,33 +38,43 @@ public class TimeActivity extends AppCompatActivity {
         binding.backword.setOnClickListener(this::updateDateAndDay);
         binding.homePage.setOnClickListener(this::switchPage);
         binding.financePage.setOnClickListener(this::switchPage);
-        binding.addEvent.setOnClickListener(this::eventPage);
-
-        binding.hourView.setOnItemClickListener((parent, view, position, id) -> {
-            HourInfo selectedHour = (HourInfo) parent.getItemAtPosition(position);
-            // Start HourActivity with the selected hour's details
-            Intent intent = new Intent(TimeActivity.this, HourActivity.class);
-            // Optionally, pass the selected hour info to HourActivity
-            startActivity(intent);
-        });
-
 
         setupHourListView();
         DateAndDay();
 
     }
-
-    private void eventPage(View view) {
-        Intent intent = new Intent(this, HourActivity.class);
-        startActivity(intent);
-
-    }
-
+    // Inside TimeActivity.java
     private void setupHourListView() {
-        List<HourInfo> hourInfos = createHourInfoList(); // Create a list of HourInfo
+        List<HourInfo> hourInfos = createHourInfoList();
         HourAdapter adapter = new HourAdapter(this, hourInfos);
         binding.hourView.setAdapter(adapter);
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            String eventName = data.getStringExtra("EVENT_NAME");
+            int meaningfulTime = data.getIntExtra("MEANINGFUL_TIME", 0);
+            int hourPosition = data.getIntExtra("HOUR_POSITION", -1);
+
+            if (hourPosition != -1) {
+                HourInfo updatedHourInfo = new HourInfo(LocalTime.of(hourPosition, 0), eventName, meaningfulTime);
+                updateHourInfo(hourPosition, updatedHourInfo);
+            }
+        }
+    }
+
+    private void updateHourInfo(int position, HourInfo updatedHourInfo) {
+        List<HourInfo> hourInfos = ((HourAdapter) binding.hourView.getAdapter()).getItems();
+        hourInfos.set(position, updatedHourInfo);
+        ((ArrayAdapter) binding.hourView.getAdapter()).notifyDataSetChanged();
+    }
+
+
+
+
 
     private List<HourInfo> createHourInfoList() {
         List<HourInfo> list = new ArrayList<>();
