@@ -4,8 +4,6 @@
     android:layout_height="60dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:clickable="true"
-    android:focusable="true"
     android:background="?attr/selectableItemBackground">
 
     <TextView
@@ -18,26 +16,36 @@
         android:textColor="@color/black">
     </TextView>
 
-    <Button
-        android:id="@+id/event"
-        android:layout_width="170dp"
+    <LinearLayout
+        android:id="@+id/eventLayout"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="2"
-        android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:text="No Event"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        android:orientation="horizontal"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
-    <TextView
-        android:id="@+id/meaningfulTime"
-        android:layout_width="0dp"
-        android:background="@color/black"
-        android:textColor="@color/white"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="60"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/eventDescription"
+            android:layout_width="152dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical"
+            android:text="No Event"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/meaningfulTime"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="60"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 </LinearLayout>

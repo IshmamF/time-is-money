@@ -9,11 +9,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.moneytimeapp.databinding.TimeActivityLayoutBinding;
+import com.example.moneytimeapp.model.HourInfo;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class TimeActivity extends AppCompatActivity {
@@ -31,9 +35,43 @@ public class TimeActivity extends AppCompatActivity {
         binding.backword.setOnClickListener(this::updateDateAndDay);
         binding.homePage.setOnClickListener(this::switchPage);
         binding.financePage.setOnClickListener(this::switchPage);
+        binding.addEvent.setOnClickListener(this::eventPage);
 
+        binding.hourView.setOnItemClickListener((parent, view, position, id) -> {
+            HourInfo selectedHour = (HourInfo) parent.getItemAtPosition(position);
+            // Start HourActivity with the selected hour's details
+            Intent intent = new Intent(TimeActivity.this, HourActivity.class);
+            // Optionally, pass the selected hour info to HourActivity
+            startActivity(intent);
+        });
+
+
+        setupHourListView();
         DateAndDay();
+
     }
+
+    private void eventPage(View view) {
+        Intent intent = new Intent(this, HourActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void setupHourListView() {
+        List<HourInfo> hourInfos = createHourInfoList(); // Create a list of HourInfo
+        HourAdapter adapter = new HourAdapter(this, hourInfos);
+        binding.hourView.setAdapter(adapter);
+    }
+
+    private List<HourInfo> createHourInfoList() {
+        List<HourInfo> list = new ArrayList<>();
+        for (int hour = 0; hour < 24; hour++) {
+            // Replace with actual event and meaningful time data if available
+            list.add(new HourInfo(LocalTime.of(hour, 0), "No Event", 0));
+        }
+        return list;
+    }
+
 
     private void updateDateAndDay(View view) {
         int id = view.getId();
