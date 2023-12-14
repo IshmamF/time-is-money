@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">moneyTimeApp</string>
+    <string name="backword"><![CDATA[<-]]></string>
+    <string name="forward"><![CDATA[->]]></string>
+</resources>

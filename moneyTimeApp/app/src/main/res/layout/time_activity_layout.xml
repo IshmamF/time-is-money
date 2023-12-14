@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        
+        <Button
+            android:background="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:id="@+id/backword"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text= "@string/backword"
+            android:textSize="20dp"
+            tools:ignore="InvalidId">
+        </Button>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_weight="2"
+            android:textStyle="bold"
+            android:text="DATE"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            >
+        </TextView>
+
+        <Button
+            android:background="@color/purple_500"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:id="@+id/forward"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/forward"
+            android:textSize="20dp">
+        </Button>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dayOfWeek"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="dayOfWeek"
+        android:textAlignment="center"
+        android:textSize="16dp"
+        android:textStyle="bold" >
+    </TextView>
+
+    <Button
+        android:id="@+id/addEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Event"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold">
+    </Button>
+
+    <ListView
+        android:id="@+id/hourView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </ListView>
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/black" >
+
+        <Button
+            android:id="@+id/financePage"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Finance"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="end"
+            >
+        </Button>
+        <Button
+            android:id="@+id/homePage"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Home"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center"
+            android:onClick="changeLayout"
+            >
+        </Button>
+        <Button
+
+            android:id="@+id/timePage"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:text="Time"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="start"
+            >
+        </Button>
+    </androidx.appcompat.widget.Toolbar>
+</LinearLayout>
