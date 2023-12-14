@@ -75,17 +75,15 @@ public class TimeActivity extends AppCompatActivity {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error");
         }
 
         TextView totalMeaningfulTimeTextView = findViewById(R.id.totalMeaningfulTime);
-        if (totalMeaningfulTimeTextView != null) {
-            totalMeaningfulTimeTextView.setText("Total Meaningful Time Today: " + String.valueOf(totalMeaningfulTime));
-        }
+        totalMeaningfulTimeTextView.setText("Total Meaningful Time Today: " + String.valueOf(totalMeaningfulTime));
     }
 
     private void updateEventRow(int hour, String eventName, int meaningfulTime) {
-        String hourString = String.format(Locale.getDefault(), "%02d", hour);
+        String hourString = String.format(Locale.getDefault(), "%1d", hour);
         int eventTextViewId = getResources().getIdentifier("event" + hourString, "id", getPackageName());
         int timeTextViewId = getResources().getIdentifier("number" + hourString, "id", getPackageName());
 

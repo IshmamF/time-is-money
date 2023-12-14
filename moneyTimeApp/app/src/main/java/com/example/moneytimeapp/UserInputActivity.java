@@ -54,7 +54,7 @@ public class UserInputActivity extends AppCompatActivity {
             eventsArray.put(event);
             Files.write(file.toPath(), eventsArray.toString().getBytes());
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error");
         }
     }
 

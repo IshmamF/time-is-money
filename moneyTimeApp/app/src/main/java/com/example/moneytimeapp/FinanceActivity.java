@@ -30,7 +30,7 @@ public class FinanceActivity extends AppCompatActivity {
         binding.timePage.setOnClickListener(this::switchPage);
         binding.submitFinance.setOnClickListener(this::submitInfo);
 
-        updateTotalCostDisplay();
+        binding.costNum.setText("Total Cost: " + totalCost);
     }
 
     private void submitInfo(View view) {
@@ -39,11 +39,9 @@ public class FinanceActivity extends AppCompatActivity {
         if (!costString.isEmpty()) {
             try {
                 int cost = Integer.parseInt(costString);
-                totalCost += cost; // Update the static variable
-                updateTotalCostDisplay(); // Update the TextView
+                totalCost += cost;
+                binding.costNum.setText("Total Cost: " + totalCost);
                 binding.lastExpense.setText(expense);
-
-                // Clear the input fields after submitting
                 binding.expenseEditText.setText("");
                 binding.lastExpenseInput.setText("");
             } catch (NumberFormatException e) {
@@ -54,9 +52,6 @@ public class FinanceActivity extends AppCompatActivity {
         }
     }
 
-    private void updateTotalCostDisplay() {
-        binding.costNum.setText("Total Cost: " + totalCost);
-    }
 
     public void switchPage(View view) {
         int id = view.getId();
