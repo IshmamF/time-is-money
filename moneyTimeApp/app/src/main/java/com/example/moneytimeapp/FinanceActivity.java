@@ -8,24 +8,23 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.moneytimeapp.databinding.FinanceActivityLayoutBinding;
 import com.example.moneytimeapp.databinding.MainActivityLayoutBinding;
+import com.example.moneytimeapp.databinding.TimeActivityLayoutBinding;
 import com.google.android.material.navigation.NavigationView;
 
-public class FinanceActivity extends AppCompatActivity implements View.OnClickListener {
+public class FinanceActivity extends AppCompatActivity {
 
-    MainActivityLayoutBinding binding;
+    FinanceActivityLayoutBinding binding;
     private TextView textView;
     private Button button;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.custom_layout_for_insertdata);
+        binding = FinanceActivityLayoutBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        textView = findViewById(R.id.amt_val);
-        button = findViewById(R.id.btnCancel);
-
-        button.setOnClickListener(this);
         binding.timePage.setOnClickListener(this::switchPage);
         binding.homePage.setOnClickListener(this::switchPage);
     }
@@ -42,14 +41,6 @@ public class FinanceActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(intent);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.btnConfirm) {
-            textView.setText("Your information is saved.");
-        } else if (v.getId() == R.id.btnCancel) {
-            textView.setText("The draft is canceled");
-        }
-    }
 
 }
 

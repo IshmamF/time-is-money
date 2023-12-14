@@ -1,18 +1,21 @@
 package com.example.moneytimeapp;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.moneytimeapp.databinding.HourActivityLayoutBinding;
 import com.example.moneytimeapp.databinding.TimeActivityLayoutBinding;
 import com.example.moneytimeapp.model.HourInfo;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,8 +27,6 @@ import java.util.Locale;
 
 public class TimeActivity extends AppCompatActivity {
     TimeActivityLayoutBinding binding;
-    HourActivityLayoutBinding hourBinding;
-
     private Calendar c = Calendar.getInstance();
 
     @Override
@@ -39,51 +40,55 @@ public class TimeActivity extends AppCompatActivity {
         binding.homePage.setOnClickListener(this::switchPage);
         binding.financePage.setOnClickListener(this::switchPage);
 
-        setupHourListView();
+        binding.addEvent.setOnClickListener(this::inputPage);
         DateAndDay();
 
     }
-    // Inside TimeActivity.java
-    private void setupHourListView() {
-        List<HourInfo> hourInfos = createHourInfoList();
-        HourAdapter adapter = new HourAdapter(this, hourInfos);
-        binding.hourView.setAdapter(adapter);
 
+    private void inputPage(View view) {
+        Intent intent = new Intent(this, UserInputActivity.class);
+        startActivity(intent);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            String eventName = data.getStringExtra("EVENT_NAME");
-            int meaningfulTime = data.getIntExtra("MEANINGFUL_TIME", 0);
-            int hourPosition = data.getIntExtra("HOUR_POSITION", -1);
+    private void loadEventsForDate(String date) {
+        clearEventRows(); // Clears any existing data on UI
+        try {
+            File file = new File(getFilesDir(), "events.json");
+            if (file.exists()) {
+                String content = new String(Files.readAllBytes(file.toPath()));
+                JSONArray eventsArray = new JSONArray(content);
 
-            if (hourPosition != -1) {
-                HourInfo updatedHourInfo = new HourInfo(LocalTime.of(hourPosition, 0), eventName, meaningfulTime);
-                updateHourInfo(hourPosition, updatedHourInfo);
+                for (int i = 0; i < eventsArray.length(); i++) {
+                    JSONObject event = eventsArray.getJSONObject(i);
+                    if (event.getString("date").equals(date)) {
+                        int hour = event.getInt("hour"); // Assuming hour is stored as integer (0-23)
+                        String eventName = event.getString("eventName");
+                        String meaningfulTime = event.getString("meaningfulTime");
+
+                        updateEventRow(hour, eventName, meaningfulTime);
+                    }
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    private void updateHourInfo(int position, HourInfo updatedHourInfo) {
-        List<HourInfo> hourInfos = ((HourAdapter) binding.hourView.getAdapter()).getItems();
-        hourInfos.set(position, updatedHourInfo);
-        ((ArrayAdapter) binding.hourView.getAdapter()).notifyDataSetChanged();
-    }
+    // Adjust the method to use the correct IDs for TextViews
+    private void updateEventRow(int hour, String eventName, String meaningfulTime) {
+        String hourString = String.format(Locale.getDefault(), "%02d", hour);
+        int eventTextViewId = getResources().getIdentifier("event" + hourString, "id", getPackageName());
+        int timeTextViewId = getResources().getIdentifier("number" + hourString, "id", getPackageName());
 
+        TextView eventTextView = findViewById(eventTextViewId);
+        TextView timeTextView = findViewById(timeTextViewId);
 
-
-
-
-    private List<HourInfo> createHourInfoList() {
-        List<HourInfo> list = new ArrayList<>();
-        for (int hour = 0; hour < 24; hour++) {
-            // Replace with actual event and meaningful time data if available
-            list.add(new HourInfo(LocalTime.of(hour, 0), "No Event", 0));
+        if (eventTextView != null && timeTextView != null) {
+            eventTextView.setText(eventName);
+            timeTextView.setText(meaningfulTime);
         }
-        return list;
     }
+
 
 
     private void updateDateAndDay(View view) {
@@ -104,7 +109,25 @@ public class TimeActivity extends AppCompatActivity {
 
         binding.date.setText(formattedDate);
         binding.dayOfWeek.setText(dayOfWeek);
+
+        loadEventsForDate(formattedDate);
     }
+
+    private void clearEventRows() {
+        for (int i = 0; i <= 24; i++) { // Assuming you have 24 hours in your layout
+            int eventTextViewId = getResources().getIdentifier("event" + i, "id", getPackageName());
+            int timeTextViewId = getResources().getIdentifier("number" + i, "id", getPackageName());
+
+            TextView eventTextView = findViewById(eventTextViewId);
+            TextView timeTextView = findViewById(timeTextViewId);
+
+            if (eventTextView != null && timeTextView != null) {
+                eventTextView.setText("");
+                timeTextView.setText("");
+            }
+        }
+    }
+
 
     private void DateAndDay() {
 

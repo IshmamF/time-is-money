@@ -21,7 +21,6 @@
         </activity>
         <activity android:name=".TimeActivity"/>
         <activity android:name=".FinanceActivity"/>
-        <activity android:name=".HourActivity"/>
         <activity android:name=".UserInputActivity"/>
 
     </application>
