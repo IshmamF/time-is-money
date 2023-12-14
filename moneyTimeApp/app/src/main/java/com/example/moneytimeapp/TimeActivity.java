@@ -1,5 +1,6 @@
 package com.example.moneytimeapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,8 @@ public class TimeActivity extends AppCompatActivity {
     TimeActivityLayoutBinding binding;
     private Calendar c = Calendar.getInstance();
 
+    private int totalMeaningfulTime;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +54,9 @@ public class TimeActivity extends AppCompatActivity {
     }
 
     private void loadEventsForDate(String date) {
-        clearEventRows(); // Clears any existing data on UI
+        clearEventRows();
+        totalMeaningfulTime = 0;
+
         try {
             File file = new File(getFilesDir(), "events.json");
             if (file.exists()) {
@@ -61,9 +66,9 @@ public class TimeActivity extends AppCompatActivity {
                 for (int i = 0; i < eventsArray.length(); i++) {
                     JSONObject event = eventsArray.getJSONObject(i);
                     if (event.getString("date").equals(date)) {
-                        int hour = event.getInt("hour"); // Assuming hour is stored as integer (0-23)
+                        int hour = event.getInt("hour");
                         String eventName = event.getString("eventName");
-                        String meaningfulTime = event.getString("meaningfulTime");
+                        int meaningfulTime = event.optInt("meaningfulTime", 0);
 
                         updateEventRow(hour, eventName, meaningfulTime);
                     }
@@ -72,10 +77,14 @@ public class TimeActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        TextView totalMeaningfulTimeTextView = findViewById(R.id.totalMeaningfulTime);
+        if (totalMeaningfulTimeTextView != null) {
+            totalMeaningfulTimeTextView.setText("Total Meaningful Time Today: " + String.valueOf(totalMeaningfulTime));
+        }
     }
 
-    // Adjust the method to use the correct IDs for TextViews
-    private void updateEventRow(int hour, String eventName, String meaningfulTime) {
+    private void updateEventRow(int hour, String eventName, int meaningfulTime) {
         String hourString = String.format(Locale.getDefault(), "%02d", hour);
         int eventTextViewId = getResources().getIdentifier("event" + hourString, "id", getPackageName());
         int timeTextViewId = getResources().getIdentifier("number" + hourString, "id", getPackageName());
@@ -85,9 +94,11 @@ public class TimeActivity extends AppCompatActivity {
 
         if (eventTextView != null && timeTextView != null) {
             eventTextView.setText(eventName);
-            timeTextView.setText(meaningfulTime);
+            timeTextView.setText(String.valueOf(meaningfulTime));
         }
+        totalMeaningfulTime += meaningfulTime;
     }
+
 
 
 
@@ -114,7 +125,7 @@ public class TimeActivity extends AppCompatActivity {
     }
 
     private void clearEventRows() {
-        for (int i = 0; i <= 24; i++) { // Assuming you have 24 hours in your layout
+        for (int i = 0; i <= 24; i++) {
             int eventTextViewId = getResources().getIdentifier("event" + i, "id", getPackageName());
             int timeTextViewId = getResources().getIdentifier("number" + i, "id", getPackageName());
 

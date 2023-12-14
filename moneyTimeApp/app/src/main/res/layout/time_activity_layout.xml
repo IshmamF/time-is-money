@@ -22,8 +22,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text= "@string/backword"
-            android:textSize="20dp"
-            tools:ignore="InvalidId">
+            android:textSize="20dp" >
         </Button>
 
         <TextView
@@ -810,6 +809,16 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/totalMeaningfulTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total Meaningful Time: 0"
+        android:layout_gravity="center_horizontal"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"/>
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -831,7 +840,6 @@
             android:text="Home"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center"
-            android:onClick="changeLayout"
             >
         </Button>
         <Button

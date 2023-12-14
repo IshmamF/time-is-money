@@ -35,7 +35,7 @@ public class UserInputActivity extends AppCompatActivity {
         try {
             JSONObject event = new JSONObject();
             event.put("date", date);
-            event.put("hour", hour); // Save hour as integer
+            event.put("hour", hour);
             event.put("eventName", eventName);
             event.put("meaningfulTime", meaningfulTime);
 
@@ -60,7 +60,7 @@ public class UserInputActivity extends AppCompatActivity {
         String eventName = binding.eventName.getText().toString();
         String meaningfulTime = binding.meaningfulTime.getText().toString();
         String date = binding.inputDate.getText().toString();
-        int hour = Integer.parseInt(binding.inputHour.getText().toString()); // Convert hour to integer
+        int hour = Integer.parseInt(binding.inputHour.getText().toString());
 
         saveEventToJson(date, hour, eventName, meaningfulTime);
 

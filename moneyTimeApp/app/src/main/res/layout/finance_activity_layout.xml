@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/financeTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Finance" >
-    </TextView>
+        android:layout_height="wrap_content"
+        android:background="@color/black"
+        android:padding="10dp"
+        android:text="Finance"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/expenseInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/financeTitle"
+        android:hint="Expense"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/expenseEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/submitFinance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/expenseInputLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="423dp"
+        android:text="Submit" />
 
     <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bottomToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/black" >
+        android:background="@color/black">
 
         <Button
             android:id="@+id/financePage"
@@ -24,27 +51,21 @@
             android:layout_height="50dp"
             android:text="Finance"
             android:layout_marginEnd="10dp"
-            android:layout_gravity="end"
-            >
-        </Button>
+            android:layout_gravity="end" />
+
         <Button
             android:id="@+id/homePage"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Home"
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="center"
-            android:onClick="changeLayout"
-            >
-        </Button>
+            android:layout_gravity="center" />
+
         <Button
             android:id="@+id/timePage"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:text="Time"
             android:layout_marginStart="10dp"
-            android:layout_gravity="start"
-            >
-        </Button>
+            android:layout_gravity="start" />
     </androidx.appcompat.widget.Toolbar>
 </RelativeLayout>
