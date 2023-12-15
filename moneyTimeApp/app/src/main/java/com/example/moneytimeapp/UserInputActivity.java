@@ -65,11 +65,14 @@ public class UserInputActivity extends AppCompatActivity {
         String date = binding.inputDate.getText().toString();
         int hour = Integer.parseInt(binding.inputHour.getText().toString());
 
-        saveEventToJson(date, hour, eventName, meaningfulTime);
+        if (eventName.isEmpty() || meaningfulTime.isEmpty() || date.isEmpty() || binding.inputHour.getText().toString().isEmpty()) {
+            Toast.makeText(this, "Please enter a value for all of them", Toast.LENGTH_SHORT).show();
+        } else {
+            saveEventToJson(date, hour, eventName, meaningfulTime);
 
-        Intent intent = new Intent(this, TimeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(intent);
+            Intent intent = new Intent(this, TimeActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void switchPage(View view) {

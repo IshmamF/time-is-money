@@ -37,16 +37,12 @@ public class FinanceActivity extends AppCompatActivity {
         String costString = binding.expenseEditText.getText().toString();
         String expense = binding.lastExpenseInput.getEditableText().toString();
         if (!costString.isEmpty()) {
-            try {
-                int cost = Integer.parseInt(costString);
-                totalCost += cost;
-                binding.costNum.setText("Total Cost: " + totalCost);
-                binding.lastExpense.setText(expense);
-                binding.expenseEditText.setText("");
-                binding.lastExpenseInput.setText("");
-            } catch (NumberFormatException e) {
-                Toast.makeText(this, "Please enter a valid number for cost.", Toast.LENGTH_SHORT).show();
-            }
+            int cost = Integer.parseInt(costString);
+            totalCost += cost;
+            binding.costNum.setText("Total Cost: " + totalCost);
+            binding.lastExpense.setText(expense);
+            binding.expenseEditText.setText("");
+            binding.lastExpenseInput.setText("");
         } else {
             Toast.makeText(this, "Please enter a cost.", Toast.LENGTH_SHORT).show();
         }
