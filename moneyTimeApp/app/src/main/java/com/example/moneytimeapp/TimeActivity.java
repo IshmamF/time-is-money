@@ -87,6 +87,7 @@ public class TimeActivity extends AppCompatActivity {
         int eventTextViewId = getResources().getIdentifier("event" + hourString, "id", getPackageName());
         int timeTextViewId = getResources().getIdentifier("number" + hourString, "id", getPackageName());
 
+
         TextView eventTextView = findViewById(eventTextViewId);
         TextView timeTextView = findViewById(timeTextViewId);
 

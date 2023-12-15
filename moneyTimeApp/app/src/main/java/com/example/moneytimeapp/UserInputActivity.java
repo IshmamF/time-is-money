@@ -17,7 +17,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.util.Date;
 
-// Inside UserInputActivity.java
 public class UserInputActivity extends AppCompatActivity {
     private UserInputLayoutBinding binding;
     private int selectedHourPosition;
