@@ -42,7 +42,6 @@ public class TimeActivity extends AppCompatActivity {
         binding.backword.setOnClickListener(this::updateDateAndDay);
         binding.financePage.setOnClickListener(this::switchPage);
         binding.timePage.setOnClickListener(this::switchPage);
-
         binding.addEvent.setOnClickListener(this::inputPage);
         DateAndDay();
 
@@ -124,7 +123,7 @@ public class TimeActivity extends AppCompatActivity {
     }
 
     private void clearEventRows() {
-        for (int i = 0; i <= 24; i++) {
+        for (int i = 0; i < 24; i++) {
             int eventTextViewId = getResources().getIdentifier("event" + i, "id", getPackageName());
             int timeTextViewId = getResources().getIdentifier("number" + i, "id", getPackageName());
 
